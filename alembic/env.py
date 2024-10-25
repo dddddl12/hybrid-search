@@ -4,14 +4,11 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-import alembic_postgresql_enum
 
-from src.config import settings
-from src.db import Base
-from src.models import *
+from app.core.db import Base, DATABASE_URL
 
 config = context.config
-config.set_main_option("sqlalchemy.url", settings.database_url)
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
