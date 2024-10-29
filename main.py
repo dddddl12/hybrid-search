@@ -28,7 +28,7 @@ def health() -> dict[str, str]:
 async def hybrid_search(
         keyword: Optional[str] = Query(
             default=None,
-            description="Search keyword to match against magazine content text"
+            description="Search keyword to match against magazine content text. This parameter is subject to vector search."
         ),
         title: Optional[str] = Query(
             default=None,

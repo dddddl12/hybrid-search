@@ -1,3 +1,5 @@
+import json
+
 from sentence_transformers import SentenceTransformer
 from app.services.elasticsearch import es_client, es_indices, ESMagazineContentResponse, ESBoolQueryFilter, \
     ESBoolQueryFilterRange
@@ -47,7 +49,8 @@ async def hybrid_search_logic(q: SearchQuery) -> SearchQueryResponse:
                         "should": [
                             {"match": {"title.keyword": q.keyword}},
                             {"match": {"content": q.keyword}}
-                        ]
+                        ],
+                        "minimum_should_match": 1
                     },
                 },
                 "script": {
