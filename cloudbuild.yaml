@@ -1,11 +1,11 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}:latest', '.' ]
+    args: [ 'build', '-t', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}/${_SERVICE_NAME}', '.' ]
 
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}:latest' ]
+    args: [ 'push', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}/${_SERVICE_NAME}' ]
 
   # Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -13,11 +13,14 @@ steps:
     args:
       [
         'run', 'deploy', '${_SERVICE_NAME}',
-        '--image', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}:latest',
+        '--image', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}/${_SERVICE_NAME}',
         '--platform', '${_PLATFORM}',
         '--region', '${_DEPLOY_REGION}',
         '--allow-unauthenticated'
       ]
+
+images:
+  - '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}/${_SERVICE_NAME}/${_SERVICE_NAME}'
 
 options:
   logging: CLOUD_LOGGING_ONLY

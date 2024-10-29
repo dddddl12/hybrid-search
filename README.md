@@ -7,7 +7,7 @@ search capabilities for optimal results.
 ## Quick Links
 
 - API Documentation: [ReDoc](https://hybrid-search-348886817567.us-central1.run.app/redoc)
-- Test Interface: [Web UI](https://hybrid-search-348886817567.us-central1.run.app/test)
+- Test Interface: [Web UI](https://hybrid-search-webpage-348886817567.us-central1.run.app)
 
 ## Project Structure
 
