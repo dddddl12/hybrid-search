@@ -1,5 +1,3 @@
-import json
-
 from sentence_transformers import SentenceTransformer
 from app.services.elasticsearch import es_client, es_indices, ESMagazineContentResponse, ESBoolQueryFilter, \
     ESBoolQueryFilterRange

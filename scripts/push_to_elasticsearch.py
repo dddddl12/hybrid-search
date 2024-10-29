@@ -127,11 +127,13 @@ async def push_to_elasticsearch() -> None:
 
 
 async def migrate() -> None:
+    es_client.connect()
     print("Initializing Elasticsearch index")
     await init_elasticsearch_index()
     print("Pushing to Elasticsearch...")
     await push_to_elasticsearch()
     print("Migration completed.")
+    await es_client.close()
 
 
 # Example usage
