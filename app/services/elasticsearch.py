@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 from typing_extensions import TypedDict, NotRequired
 
 from elasticsearch import AsyncElasticsearch
@@ -7,11 +7,21 @@ from pydantic import BaseModel, model_validator
 from app.core.config import settings
 from app.schemas import MagazineContentHit
 
-es_client = AsyncElasticsearch(
-    settings.elasticsearch_url,
-    api_key=settings.elasticsearch_api_key,
-    verify_certs=not settings.is_local
-)
+
+class ElasticsearchClient(AsyncElasticsearch):
+    def __init__(self) -> None:
+        # Postpone the initialization for asynccontextmanager
+        pass
+
+    def connect(self) -> None:
+        super().__init__(
+            settings.elasticsearch_url,
+            api_key=settings.elasticsearch_api_key,
+            verify_certs=not settings.is_local
+        )
+
+
+es_client = ElasticsearchClient()
 
 
 class ElasticsearchIndices(BaseModel):

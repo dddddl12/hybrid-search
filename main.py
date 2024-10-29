@@ -1,14 +1,24 @@
+from contextlib import asynccontextmanager
 from datetime import date
-from typing import Optional
+from typing import Optional, AsyncIterator
 
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.schemas import SearchQueryResponse, CategoryEnum, SearchQuery, SearchQueryFilters
+from app.services.elasticsearch import es_client
 from app.services.search import hybrid_search_logic
 
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    es_client.connect()
+    yield
+    await es_client.close()
+
+
 # FastAPI setup
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 # CORS configuration
 app.add_middleware(
