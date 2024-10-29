@@ -19,6 +19,11 @@ app.add_middleware(
 )
 
 
+@app.get("/")
+def health() -> dict[str, str]:
+    return {"status": "ok"}
+
+
 @app.get("/hybrid_search", response_model=SearchQueryResponse)
 async def hybrid_search(
         keyword: Optional[str] = Query(
