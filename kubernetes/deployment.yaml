@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: my-service
+        app: hybrid-search2
     spec:
       containers:
         - name: hybrid-search2
