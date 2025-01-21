@@ -1,11 +1,11 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}', '.' ]
+    args: [ 'build', '-t', '${_AR_HOSTNAME}/$PROJECT_ID/hybrid-search/${_SERVICE_NAME}', '.' ]
 
   # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}' ]
+    args: [ 'push', '${_AR_HOSTNAME}/$PROJECT_ID/hybrid-search/${_SERVICE_NAME}' ]
 
   # Authenticate with GKE cluster
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -34,7 +34,7 @@ steps:
       ]
 
 images:
-  - '${_AR_HOSTNAME}/$PROJECT_ID/${_SERVICE_NAME}'
+  - '${_AR_HOSTNAME}/$PROJECT_ID/hybrid-search/${_SERVICE_NAME}'
 
 #substitutions:
 #  _AR_HOSTNAME: 'us-central1-docker.pkg.dev'

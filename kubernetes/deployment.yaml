@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hybrid-search2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hybrid-search2
+  template:
+    metadata:
+      labels:
+        app: my-service
+    spec:
+      containers:
+        - name: hybrid-search2
+          image: ${_AR_HOSTNAME}/$PROJECT_ID/hybrid-search/${_SERVICE_NAME}:latest
+          ports:
+            - containerPort: 8080
