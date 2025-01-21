@@ -26,16 +26,15 @@ steps:
       ]
     env:
       - CLOUDSDK_COMPUTE_REGION=${_CLUSTER_REGION}
-      #      - CLOUDSDK_COMPUTE_ZONE=${_COMPUTE_ZONE}
       - CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}
 
   # Optional: Rollout status check
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args:
-      [
-        'rollout', 'status',
-        'deployment/${_SERVICE_NAME}',
-      ]
+#  - name: 'gcr.io/cloud-builders/kubectl'
+#    args:
+#      [
+#        'rollout', 'status',
+#        'deployment/${_SERVICE_NAME}',
+#      ]
 
 images:
   - '${_AR_HOSTNAME}/$PROJECT_ID/hybrid-search/${_SERVICE_NAME}'
