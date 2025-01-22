@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: hybrid-search2
-          image: ${_AR_HOSTNAME}/$PROJECT_ID/hybrid-search/${_SERVICE_NAME}:latest
+          image: us-central1-docker.pkg.dev/my-project/hybrid-search/hybrid-search2:latest
           ports:
             - containerPort: 8080
